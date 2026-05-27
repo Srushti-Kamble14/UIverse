@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../components/Button/Button.jsx";
 import Navbar from "../components/Navbar/Navbar.jsx";
+import Footer from "../components/Footer/Footer.jsx";
 import "./Home.css";
 
 function Home() {
@@ -213,9 +214,7 @@ const faqs = [
           ↑
         </button>
       )}
-      <footer className="home-footer">
-        <p>Made with care for the open-source community · UIverse 2025</p>
-      </footer>
+      <Footer />
     </div>
   );
 }
