@@ -3,6 +3,7 @@ import Button from '../components/Button/Button.jsx'
 import Navbar from '../components/Navbar/Navbar.jsx'
 import Badge from '../components/Badge/Badge.jsx'
 import Alert from '../components/Alert/Alert.jsx'
+import Tabs from '../components/Tabs/Tabs.jsx'
 import { componentsList } from '../data/componentsList.js'
 import './Components.css'
 
@@ -36,6 +37,18 @@ const sections = [
     icon: (
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M10 2L2 22h20L14 2z"/>
+      </svg>
+    ),
+  },
+  {
+    id: 'tabs',
+    label: 'Tabs',
+    componentName: 'Tabs',
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <rect x="3" y="3" width="18" height="18" rx="2"/>
+        <line x1="3" y1="9" x2="21" y2="9"/>
+        <line x1="9" y1="21" x2="9" y2="9"/>
       </svg>
     ),
   },
@@ -82,6 +95,7 @@ function Components() {
   const buttonsRef = useRef(null)
   const badgesRef = useRef(null)
   const alertsRef = useRef(null)
+  const tabsRef = useRef(null)
   const allComponentsRef = useRef(null)
 
   const handleCopy = (code) => {
@@ -103,6 +117,9 @@ function Components() {
         break
       case 'alerts':
         element = alertsRef.current
+        break
+      case 'tabs':
+        element = tabsRef.current
         break
       case 'all-components':
         element = allComponentsRef.current
@@ -157,6 +174,8 @@ function Components() {
         scrollTo('badges')
       } else if (searchLower.includes('alert') || filteredComponents.some(c => c.name === 'Alert')) {
         scrollTo('alerts')
+      } else if (searchLower.includes('tab') || filteredComponents.some(c => c.name === 'Tabs')) {
+        scrollTo('tabs')
       } else if (filteredComponents.length > 0) {
         scrollTo('all-components')
       }
@@ -174,6 +193,7 @@ function Components() {
     if (shouldShowSection('buttons', 'Button')) count++
     if (shouldShowSection('badges', 'Badge')) count++
     if (shouldShowSection('alerts', 'Alert')) count++
+    if (shouldShowSection('tabs', 'Tabs')) count++
     if (filteredComponents.length > 0) count++
     return count
   }, [searchQuery, filteredComponents])
@@ -429,6 +449,162 @@ function Components() {
                         <td>boolean</td>
                         <td><code>false</code></td>
                         <td>Shows close button</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* ================= TABS ================= */}
+          {shouldShowSection('tabs', 'Tabs') && (
+            <section className="comp-section" id="tabs" ref={tabsRef}>
+              <div className="comp-section-header">
+                <h2>Tabs</h2>
+                <span className="comp-badge comp-badge--stable">Stable</span>
+              </div>
+
+              <p className="comp-section-desc">
+                Accessible tabs component with animated indicators, supporting underline and pills variants.
+              </p>
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Underline Variant (Default)</h3>
+                <div className="comp-preview" style={{ flexDirection: 'column', alignItems: 'stretch' }}>
+                  <Tabs defaultValue="overview">
+                    <Tabs.List>
+                      <Tabs.Trigger value="overview">Overview</Tabs.Trigger>
+                      <Tabs.Trigger value="features">Features</Tabs.Trigger>
+                      <Tabs.Trigger value="disabled" disabled>Disabled Tab</Tabs.Trigger>
+                      <Tabs.Trigger value="api">API Reference</Tabs.Trigger>
+                    </Tabs.List>
+                    <Tabs.Content value="overview">
+                      <div className="tab-demo-content" style={{ padding: '8px 0' }}>
+                        <h4 style={{ marginBottom: '8px', color: 'var(--text)' }}>Explore UIverse</h4>
+                        <p>UIverse is a collection of handcrafted, accessible React components designed to make building beautiful interfaces fast and simple.</p>
+                      </div>
+                    </Tabs.Content>
+                    <Tabs.Content value="features">
+                      <div className="tab-demo-content" style={{ padding: '8px 0' }}>
+                        <h4 style={{ marginBottom: '8px', color: 'var(--text)' }}>Key Features</h4>
+                        <p>Our components are responsive, support dark mode natively, are keyboard accessible, and follow standard WAI-ARIA guidelines.</p>
+                      </div>
+                    </Tabs.Content>
+                    <Tabs.Content value="api">
+                      <div className="tab-demo-content" style={{ padding: '8px 0' }}>
+                        <h4 style={{ marginBottom: '8px', color: 'var(--text)' }}>Compound API Pattern</h4>
+                        <p>Uses React Context to implicitly share state between components, making it flexible and easy to customise layouts.</p>
+                      </div>
+                    </Tabs.Content>
+                  </Tabs>
+                </div>
+              </div>
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Pills Variant</h3>
+                <div className="comp-preview" style={{ flexDirection: 'column', alignItems: 'stretch' }}>
+                  <Tabs defaultValue="html" variant="pills">
+                    <Tabs.List>
+                      <Tabs.Trigger value="html">HTML5</Tabs.Trigger>
+                      <Tabs.Trigger value="css">CSS3</Tabs.Trigger>
+                      <Tabs.Trigger value="js">JavaScript</Tabs.Trigger>
+                    </Tabs.List>
+                    <Tabs.Content value="html">
+                      <div className="tab-demo-content" style={{ padding: '8px 0' }}>
+                        <h4 style={{ marginBottom: '8px', color: 'var(--text)' }}>Semantic Markup</h4>
+                        <p>Write clean, structured, and search-engine friendly markup using HTML5 elements.</p>
+                      </div>
+                    </Tabs.Content>
+                    <Tabs.Content value="css">
+                      <div className="tab-demo-content" style={{ padding: '8px 0' }}>
+                        <h4 style={{ marginBottom: '8px', color: 'var(--text)' }}>Modern Layouts</h4>
+                        <p>Utilise modern CSS properties like Flexbox, Grid, Custom Properties, and Subgrid for layout.</p>
+                      </div>
+                    </Tabs.Content>
+                    <Tabs.Content value="js">
+                      <div className="tab-demo-content" style={{ padding: '8px 0' }}>
+                        <h4 style={{ marginBottom: '8px', color: 'var(--text)' }}>Dynamic Interactivity</h4>
+                        <p>Add stateful behavior, async data loading, and interactive workflows with Javascript.</p>
+                      </div>
+                    </Tabs.Content>
+                  </Tabs>
+                </div>
+              </div>
+
+              <div className="code-block">
+                <div className="code-block-header">
+                  <span>JSX (Compound API)</span>
+                  <button
+                    className="copy-btn"
+                    onClick={() =>
+                      handleCopy(`<Tabs defaultValue="tab1">
+  <Tabs.List>
+    <Tabs.Trigger value="tab1">Tab 1</Tabs.Trigger>
+    <Tabs.Trigger value="tab2">Tab 2</Tabs.Trigger>
+  </Tabs.List>
+  <Tabs.Content value="tab1">Content 1</Tabs.Content>
+  <Tabs.Content value="tab2">Content 2</Tabs.Content>
+</Tabs>`)
+                    }
+                  >
+                    {copied ? (
+                      <>
+                        <CheckIcon /> Copied
+                      </>
+                    ) : (
+                      <>
+                        <CopyIcon /> Copy
+                      </>
+                    )}
+                  </button>
+                </div>
+                <pre>{`<Tabs defaultValue="tab1">
+  <Tabs.List>
+    <Tabs.Trigger value="tab1">Tab 1</Tabs.Trigger>
+    <Tabs.Trigger value="tab2">Tab 2</Tabs.Trigger>
+  </Tabs.List>
+  <Tabs.Content value="tab1">Content 1</Tabs.Content>
+  <Tabs.Content value="tab2">Content 2</Tabs.Content>
+</Tabs>`}</pre>
+              </div>
+
+              <div className="comp-subsection">
+                <h3 className="comp-subsection-title">Props</h3>
+                <div className="props-table-wrap">
+                  <table className="props-table">
+                    <thead>
+                      <tr>
+                        <th>Prop</th>
+                        <th>Type</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>defaultValue</code></td>
+                        <td>string</td>
+                        <td><code>-</code></td>
+                        <td>The value of the active tab on initial render.</td>
+                      </tr>
+                      <tr>
+                        <td><code>value</code></td>
+                        <td>string</td>
+                        <td><code>-</code></td>
+                        <td>Controlled active tab value.</td>
+                      </tr>
+                      <tr>
+                        <td><code>onValueChange</code></td>
+                        <td>function</td>
+                        <td><code>-</code></td>
+                        <td>Event handler called when the active tab changes.</td>
+                      </tr>
+                      <tr>
+                        <td><code>variant</code></td>
+                        <td>string</td>
+                        <td><code>"underline"</code></td>
+                        <td>Visual style: <code>"underline"</code> or <code>"pills"</code>.</td>
                       </tr>
                     </tbody>
                   </table>
