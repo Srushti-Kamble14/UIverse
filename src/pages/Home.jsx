@@ -38,6 +38,54 @@ const faqs = [
   },
 ];
 
+const testimonials = [
+  {
+    name: "Sarah Johnson",
+    role: "Frontend Developer",
+    text: "UIverse makes it easy to build and learn at the same time."
+  },
+  {
+    name: "Alex Chen",
+    role: "Open Source Contributor",
+    text: "The project structure is simple and beginner-friendly."
+  },
+  {
+    name: "Priya Sharma",
+    role: "Student Developer",
+    text: "A great place to start contributing to open source."
+  },
+  {
+  name: "Rahul Mehta",
+  role: "Full Stack Developer",
+  text: "Clean components and very intuitive structure. Great for learning React fundamentals."
+  },
+  {
+    name: "Emily Watson",
+    role: "UI/UX Designer",
+    text: "The design system is minimal yet flexible enough to experiment with real UI patterns."
+  },
+  {
+    name: "Karan Patel",
+    role: "Open Source Beginner",
+    text: "Perfect project for first-time contributors. Everything is easy to understand."
+  },
+  {
+    name: "Sophia Lee",
+    role: "Frontend Intern",
+    text: "Loved how each component is isolated and reusable. Makes development faster."
+  },
+  {
+    name: "Arjun Nair",
+    role: "Web Developer",
+    text: "A great way to practice React by building real-world UI components."
+  },
+  {
+    name: "Neha Verma",
+    role: "Computer Science Student",
+    text: "UIverse helped me understand component-based architecture better."
+  }
+];
+
 
 
   useEffect(() => {
@@ -173,6 +221,21 @@ const faqs = [
               <Button text="Fork on GitHub" variant="primary" size="lg" />
             </a>
           </div>
+        </div>
+      </section>
+
+      {/* ── Testimonials ── */}
+      <section className="testimonial-section">
+        <h2 className="section-heading">Testimonials</h2>
+        <p className="section-subheading">Know what people think and feel about UIverse</p>
+        <div className="testimonial-container">
+          {[...testimonials, ...testimonials].map((item, index) => (
+            <div className="testimonial-card" key={index}>
+              <p>"{item.text}"</p>
+              <h4>{item.name}</h4>
+              <span>{item.role}</span>
+            </div>
+         ))}
         </div>
       </section>
 
